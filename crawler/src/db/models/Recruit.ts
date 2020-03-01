@@ -1,24 +1,26 @@
 import * as Sequelize from 'sequelize';
 
-interface RecruitAttributes extends Sequelize.Model {
+export interface RecruitAttributes extends Sequelize.Model {
+  company: string;
   url: string;
   title: string;
   startDate?: Date;
   endDate?: Date;
-  qualification: string;
-  jobType: string;
-  createDate: Date;
+  updateDate: Date;
 }
 
 export type RecruitStatic = typeof Sequelize.Model & {
   new (values?: object, options?: Sequelize.BuildOptions): RecruitAttributes;
 };
 
-// eslint-disable-next-line import/prefer-default-export
 export const recruitFactory = (sequelize: Sequelize.Sequelize) => {
   return <RecruitStatic>sequelize.define(
     'RecruitModel',
     {
+      company: {
+        type: new Sequelize.DataTypes.STRING(100),
+        allowNull: false,
+      },
       url: {
         type: new Sequelize.DataTypes.STRING(300),
         primaryKey: true,
@@ -35,19 +37,9 @@ export const recruitFactory = (sequelize: Sequelize.Sequelize) => {
         type: Sequelize.DataTypes.DATE,
         field: 'end_date',
       },
-      qualification: {
-        type: new Sequelize.DataTypes.STRING(10000),
-        allowNull: false,
-      },
-      jobType: {
-        type: new Sequelize.DataTypes.STRING(20),
-        allowNull: false,
-        field: 'job_type',
-      },
-      createDate: {
+      updateDate: {
         type: Sequelize.DataTypes.DATE,
-        allowNull: false,
-        field: 'create_date',
+        field: 'update_date',
       },
     },
     {

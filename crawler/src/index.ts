@@ -1,8 +1,15 @@
-import KakaoEnterprise from './module/ComponyCrawler/KakaoEnterprise';
+import KakaoEnterprise from './model/crawler/module/KakaoEnterprise';
+import RecruitCrawler from './model/crawler/RecruitCrawler';
+import Recruit from './model/Recruit';
+import puppeteer from 'puppeteer';
+import moment from 'moment';
 
-// db.Recruit.findAll().then((value: any) => {
-//   console.log(value);
-// });
+(async () => {
+  const recruit = await Recruit.getInstance();
+  const crawler = new RecruitCrawler();
 
-const kakao = new KakaoEnterprise();
-kakao.getRecruits();
+  const recruitData = await crawler.getRecruitDatas(new KakaoEnterprise());
+  await crawler.close();
+
+  await recruit.insertRecruit(recruitData);
+})();
