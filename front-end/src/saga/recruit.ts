@@ -4,7 +4,7 @@ import axios from "axios";
 
 function* getRecruits(action: any) {
   try {
-    const request = yield axios.get("http://localhost:4000/api/recruits", {
+    const request = yield axios.get("http://52.231.91.8:4000/api/recruits", {
       params: {
         searchTerm: action.payload.searchTerm,
         offset: action.payload.offset,
