@@ -5,8 +5,6 @@ export interface RecruitAttributes extends Sequelize.Model {
   title: string;
   startDate?: Date;
   endDate?: Date;
-  qualification: string;
-  jobType: string;
   createDate: Date;
 }
 
@@ -37,20 +35,6 @@ export const recruitFactory = (sequelize: Sequelize.Sequelize) => {
       endDate: {
         type: Sequelize.DataTypes.DATE,
         field: "end_date"
-      },
-      qualification: {
-        type: new Sequelize.DataTypes.STRING(10000),
-        allowNull: false
-      },
-      jobType: {
-        type: new Sequelize.DataTypes.STRING(20),
-        allowNull: false,
-        field: "job_type"
-      },
-      createDate: {
-        type: Sequelize.DataTypes.DATE,
-        allowNull: false,
-        field: "create_date"
       }
     },
     {

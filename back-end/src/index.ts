@@ -1,7 +1,6 @@
 import "./LoadEnv"; // Must be the first import
-import app from "server";
+import app from "Server";
 import { logger } from "shared";
-import recruit from "./model/Recruits";
 
 // Start the server
 const port = Number(process.env.PORT || 3000);

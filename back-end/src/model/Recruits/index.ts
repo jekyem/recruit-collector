@@ -44,8 +44,7 @@ class Recruits {
             "%Y-%m-%d %H:%i:%S"
           ),
           "endDate"
-        ],
-        [Sequelize.literal(`'신입/경력'`), "job_type"]
+        ]
       ],
       where: { title: { [Op.like]: `%${searchTerm}%` } },
       offset,
