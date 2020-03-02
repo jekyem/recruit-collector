@@ -32,13 +32,17 @@ const App = () => (
 const configStore = () => {
   const sagaMiddleware = createSagaMiddleware();
   const middlewares = [sagaMiddleware];
-  const enhancer = compose(
-    applyMiddleware(...middlewares),
-    (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
-      (window as any).__REDUX_DEVTOOLS_EXTENSION__()
-  );
+  const reduxDevTools =
+    process.env.NODE_ENV === "development"
+      ? (window as any).__REDUX_DEVTOOLS_EXTENSION__
+        ? (window as any).__REDUX_DEVTOOLS_EXTENSION__()
+        : (f: any) => f
+      : null;
 
-  const store = createStore(reducers, enhancer);
+  const store = createStore(
+    reducers,
+    compose(applyMiddleware(...middlewares), reduxDevTools)
+  );
   sagaMiddleware.run(rootSaga);
 
   return store;
