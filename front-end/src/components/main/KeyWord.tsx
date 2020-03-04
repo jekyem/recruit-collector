@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { Icon } from "antd";
 
-const Wapper = styled.div`
+const Wapper = styled.div<{ backgroundColor: string }>`
   display: inline-block;
-  background-color: #79a8a9;
+  background-color: ${({ backgroundColor }) => backgroundColor};
   color: white;
   font-weight: bold;
   border-radius: 20px;
@@ -27,11 +27,13 @@ const CloseIcon = styled(Icon).attrs({ type: "close" })`
 interface PropsType {
   keyWord: string;
   removeKeyWord: (keyWord: string) => void;
+  color?: string;
 }
 
 const KeyWord = (props: PropsType) => {
+  const backgroundColor = props.color ? props.color : "#FF2984";
   return (
-    <Wapper>
+    <Wapper backgroundColor={backgroundColor}>
       {props.keyWord}
       <CloseIcon onClick={() => props.removeKeyWord(props.keyWord)} />
     </Wapper>

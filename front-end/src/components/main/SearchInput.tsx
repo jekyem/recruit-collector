@@ -10,6 +10,27 @@ const Wapper = styled.div`
 const Search = styled(Input.Search)`
   height: 40px;
   margin-bottom: 10px;
+
+  input {
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 20px;
+    border-radius: 0px;
+    ::placeholder {
+      color: #dfdfdf;
+    }
+    :focus {
+      box-shadow: none;
+    }
+  }
+
+  svg {
+    color: #ff2984;
+    font-size: 22px;
+  }
+
+  /* font-weight: bold; */
+
   /* & > .ant-input {
     border: 2px solid black;
   } */
@@ -26,13 +47,17 @@ const SearchInput = (props: PropsType) => {
   const { keyWords } = props;
 
   const KeyWordComponents = useCallback(() => {
-    return keyWords.map((keyword: string, index: number) => (
-      <KeyWord
-        key={index}
-        keyWord={keyword}
-        removeKeyWord={props.removeKeyWord}
-      />
-    ));
+    return keyWords.map((keyword: string, index: number) => {
+      const colors = ["#FF2984", "#FF295B", "#FF2929"];
+      return (
+        <KeyWord
+          key={index}
+          keyWord={keyword}
+          removeKeyWord={props.removeKeyWord}
+          color={colors[index % colors.length]}
+        />
+      );
+    });
   }, [keyWords, props.removeKeyWord])();
 
   return (
@@ -46,6 +71,7 @@ const SearchInput = (props: PropsType) => {
           const initializeTerm = props.search(term);
           if (initializeTerm) setTerm("");
         }}
+        placeholder="Search"
       />
       {KeyWordComponents}
     </Wapper>

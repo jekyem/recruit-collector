@@ -3,8 +3,7 @@ import styled from "styled-components";
 
 const Wapper = styled.div`
   box-sizing: border-box;
-  background-color: #f4f7f7;
-  border-bottom: 1.5px solid #79a8a9;
+  background-color: #f2f2f2;
   height: 70px;
   width: 100%;
 `;

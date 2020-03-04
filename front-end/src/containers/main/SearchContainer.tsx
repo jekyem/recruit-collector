@@ -10,7 +10,7 @@ const SearchContainer = () => {
 
   const search = useCallback(
     (searchTerm: string): boolean => {
-      if (searchTerm.substr(0, 2) === "# ") {
+      if (searchTerm.substr(0, 1) === "#") {
         tags.push(searchTerm);
         setTags(Array.from(new Set(tags)));
         return true;

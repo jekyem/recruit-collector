@@ -5,36 +5,44 @@ import RecruitInfo from "model/RecruitInfo";
 const Item = styled.li`
   display: flex;
   padding: 12px 0px;
-  height: 100px;
+  min-height: 90px;
   border-bottom: 1px solid #cccccc;
 `;
 
 const CompanyName = styled.div`
-  margin-right: 20px;
-  border-right: 1.5px solid black;
-  width: 190px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  width: 300px;
 `;
+
 const RecruitContnet = styled.a`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   width: 100%;
-  cursor: pointer;
+  padding-left: 30px;
   color: black;
+  cursor: pointer;
   :hover {
     color: black;
   }
 `;
-
 const Row = styled.div`
   width: 100%;
-  display: flex;
-  flex: 1;
 `;
 
-const Status = styled.div`
-  display: block;
-  margin-left: auto;
-  margin-right: 10px;
+const Title = styled.span`
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0px;
+`;
+
+const DueDate = styled.span`
+  font-size: 14px;
+  color: #969696;
 `;
 
 interface PropsType {
@@ -48,13 +56,12 @@ const RecruitItem = (props: PropsType) => {
       <CompanyName>{company}</CompanyName>
       <RecruitContnet href={url} target="_blank">
         <Row>
-          <h2>{title}</h2>
-          {/* <Status>모집 중</Status> */}
+          <Title>{title}</Title>
         </Row>
-        {/* 타이틀  모집중, 종료 */}
         <Row>
-          {" "}
-          {startDate} ~ {endDate}
+          <DueDate>
+            모집기간 | {startDate} ~ {endDate}
+          </DueDate>
         </Row>
       </RecruitContnet>
     </Item>
