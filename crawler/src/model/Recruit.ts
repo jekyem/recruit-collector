@@ -1,14 +1,15 @@
 import { Moment } from 'moment';
+import moment from 'moment';
+
 import db from '../db';
-import moment = require('moment');
 
 export interface RecruitData {
   company: string;
   url: string;
   title: string;
   startDate: Moment;
-  endDate: Moment;
-  contents: string;
+  endDate: Moment | null;
+  contents?: string;
 }
 
 export default class Recruit {
@@ -32,8 +33,6 @@ export default class Recruit {
       endDate: data.endDate,
       updateDate: moment(),
     }));
-
-    console.log(rows[5]);
 
     db.Recruit.bulkCreate(rows, {
       updateOnDuplicate: ['company', 'title', 'startDate', 'endDate'],

@@ -1,15 +1,16 @@
 import { Page, ElementHandle } from 'puppeteer';
 import moment from 'moment';
 
-import CrawlerAble from 'model/crawler/CrawlerAble';
+import CrawlerAble from 'model/Crawler/CrawlerAble';
 import { RecruitData } from 'model/Recruit';
 
 const RECRUIT_LIST_PAGE_URL = 'https://kakaoenterprise.recruiter.co.kr/app/jobnotice/list';
 const RECRUIT_NOTIFICATION_PAGE_URL = 'https://kakaoenterprise.recruiter.co.kr/app/jobnotice/view';
 
 export default class KakaoEnterprise implements CrawlerAble {
-  public getRecruitUrls = async (page: Page): Promise<string[]> => {
+  public getRecruitLists = async (page: Page): Promise<{ url: string; parm?: any }[]> => {
     await page.goto(RECRUIT_LIST_PAGE_URL);
+    await page.waitFor(200);
     await page.waitForSelector('span#breakcrumb');
 
     //Click Tech Menu
@@ -17,7 +18,7 @@ export default class KakaoEnterprise implements CrawlerAble {
     techMenu.click();
     await page.waitForSelector('div.paging li');
     //---------
-    const recruitUrls: string[] = [];
+    const recruitUrls: { url: string }[] = [];
     let pageIndex = 1;
     let nextPageButton: ElementHandle | null = await page.$(
       `div.paging li:nth-child(${pageIndex})`,
@@ -28,7 +29,7 @@ export default class KakaoEnterprise implements CrawlerAble {
       await page.waitForSelector(`div.paging li:nth-child(${pageIndex}) a.active`);
 
       const extractedURL = await this.extractRecruitUrls(page);
-      recruitUrls.push(...extractedURL);
+      recruitUrls.push(...extractedURL.map(url => ({ url })));
 
       nextPageButton = await page.$(`div.paging li:nth-child(${++pageIndex})`);
     }

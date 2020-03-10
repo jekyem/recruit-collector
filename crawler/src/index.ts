@@ -1,15 +1,16 @@
-import KakaoEnterprise from './model/crawler/module/KakaoEnterprise';
-import RecruitCrawler from './model/crawler/RecruitCrawler';
+import Crawler from './model/Crawler';
 import Recruit from './model/Recruit';
-import puppeteer from 'puppeteer';
-import moment from 'moment';
+import { getModules } from './model/Crawler/module/getModules';
 
 (async () => {
   const recruit = await Recruit.getInstance();
-  const crawler = new RecruitCrawler();
+  const crawler = new Crawler();
+  const crawlModules = await getModules();
 
-  const recruitData = await crawler.getRecruitDatas(new KakaoEnterprise());
+  for (const module of crawlModules) {
+    const recruitData = await crawler.getRecruitDatas(module);
+    await recruit.insertRecruit(recruitData);
+  }
+
   await crawler.close();
-
-  await recruit.insertRecruit(recruitData);
 })();
