@@ -90,16 +90,10 @@ export default class Naver implements CrawlingModule {
     );
     const endDate = parm.period === '상시모집' ? null : parm.period.substr(11);
 
-    console.log(title);
-    console.log(company);
-    console.log(contents);
-    console.log(startDate);
-    console.log(endDate);
-
     if (!(title && startDate)) throw new Error('네이버 채용공고 파싱에러 발생');
     return {
       company,
-      url,
+      url: this.baseURL + url,
       title,
       startDate: moment(startDate, 'YYYY.MM.DD'),
       endDate: endDate ? moment(endDate, 'YYYY.MM.DD') : null,
