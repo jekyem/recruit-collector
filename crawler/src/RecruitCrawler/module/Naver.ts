@@ -1,8 +1,8 @@
 import { Page } from 'puppeteer';
 import moment from 'moment';
 
-import CrawlerAble from '../CrawlerAble';
-import { RecruitData } from '../../Recruit';
+import CrawlingModule from '../CrawlingModule';
+import RecruitData from 'DataType/RecruitData';
 
 const RECRUIT_LIST_PAGE_URL = 'https://recruit.navercorp.com/naver/job/list/developer';
 
@@ -15,7 +15,7 @@ interface ParmType {
   company: string;
 }
 
-export default class Naver implements CrawlerAble {
+export default class Naver implements CrawlingModule {
   private logoToCompanyTitle: CompanyHash = {};
   private baseURL: string = 'https://recruit.navercorp.com/';
 

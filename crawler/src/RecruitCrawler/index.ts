@@ -1,9 +1,9 @@
-import { RecruitData } from 'model/Recruit';
+import RecruitData from 'DataType/RecruitData';
 import puppeteer from 'puppeteer';
 
-import CrawlerAble from './CrawlerAble';
+import CrawlingModule from './CrawlingModule';
 
-export default class Crawler {
+export default class RecruitCrawler {
   private browser: Promise<puppeteer.Browser>;
   private pageSize: number = 10;
 
@@ -11,7 +11,7 @@ export default class Crawler {
     this.browser = puppeteer.launch({ headless: false });
   }
 
-  public getRecruitDatas = async (module: CrawlerAble): Promise<Array<RecruitData>> => {
+  public getRecruitsData = async (module: CrawlingModule): Promise<Array<RecruitData>> => {
     const page = await (await this.browser).newPage();
     const recruitList = await module.getRecruitLists(page);
     await page.close();

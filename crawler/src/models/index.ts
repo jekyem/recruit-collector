@@ -1,7 +1,7 @@
 import * as Sequelize from 'sequelize';
-import { recruitFactory } from './models/Recruit';
+import { recruitFactory } from './Recruit';
 
-const dbConfig = require('./config/dbConfig.json');
+const dbConfig = require('./DBConfig.json');
 
 const sequelize = new Sequelize.Sequelize(
   dbConfig.database,
@@ -10,8 +10,6 @@ const sequelize = new Sequelize.Sequelize(
   dbConfig.options,
 );
 
-const db = {
+export default {
   Recruit: recruitFactory(sequelize),
 };
-
-export default db;

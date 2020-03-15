@@ -1,26 +1,17 @@
-import { Moment } from 'moment';
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 
-import db from '../db';
+import db from '../models';
+import RecruitData from 'DataType/RecruitData';
 
-export interface RecruitData {
-  company: string;
-  url: string;
-  title: string;
-  startDate: Moment;
-  endDate: Moment | null;
-  contents?: string;
-}
+export default class RecruitService {
+  private static _instance: RecruitService;
 
-export default class Recruit {
-  private static _instance: Recruit;
-
-  public static getInstance = (): Recruit => {
-    if (!Recruit._instance) {
-      Recruit._instance = new Recruit();
+  public static getInstance = (): RecruitService => {
+    if (!RecruitService._instance) {
+      RecruitService._instance = new RecruitService();
       //   await Recruit.init();
     }
-    return Recruit._instance;
+    return RecruitService._instance;
   };
 
   private static init = async (): Promise<void> => {};

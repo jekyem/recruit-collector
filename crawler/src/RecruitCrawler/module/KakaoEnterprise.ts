@@ -1,13 +1,13 @@
 import { Page, ElementHandle } from 'puppeteer';
 import moment from 'moment';
 
-import CrawlerAble from 'model/Crawler/CrawlerAble';
-import { RecruitData } from 'model/Recruit';
+import CrawlingModule from 'RecruitCrawler/CrawlingModule';
+import RecruitData from 'DataType/RecruitData';
 
 const RECRUIT_LIST_PAGE_URL = 'https://kakaoenterprise.recruiter.co.kr/app/jobnotice/list';
 const RECRUIT_NOTIFICATION_PAGE_URL = 'https://kakaoenterprise.recruiter.co.kr/app/jobnotice/view';
 
-export default class KakaoEnterprise implements CrawlerAble {
+export default class KakaoEnterprise implements CrawlingModule {
   public getRecruitLists = async (page: Page): Promise<{ url: string; parm?: any }[]> => {
     await page.goto(RECRUIT_LIST_PAGE_URL);
     await page.waitFor(200);
