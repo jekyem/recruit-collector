@@ -8,6 +8,8 @@ const RECRUIT_LIST_PAGE_URL = 'https://kakaoenterprise.recruiter.co.kr/app/jobno
 const RECRUIT_NOTIFICATION_PAGE_URL = 'https://kakaoenterprise.recruiter.co.kr/app/jobnotice/view';
 
 export default class KakaoEnterprise implements CrawlingModule {
+  private moduleName = '카카오 엔터프라이즈';
+
   public getRecruitLists = async (page: Page): Promise<{ url: string; parm?: any }[]> => {
     await page.goto(RECRUIT_LIST_PAGE_URL);
     await page.waitFor(200);
@@ -50,7 +52,7 @@ export default class KakaoEnterprise implements CrawlingModule {
     return recruitUrls;
   };
 
-  async getRecruitData(page: Page, url: string): Promise<RecruitData> {
+  public async getRecruitData(page: Page, url: string): Promise<RecruitData> {
     await page.goto(url);
     const company = '카카오 앤터프라이즈';
     const title = await page.evaluate(
@@ -68,6 +70,8 @@ export default class KakaoEnterprise implements CrawlingModule {
       contents: contents ? contents : '',
     };
   }
+
+  public getModuleName = () => this.moduleName;
 
   private extractDate = async (page: Page) => {
     const recruitPeriod = await page.evaluate(() =>

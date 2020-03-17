@@ -1,11 +1,13 @@
 import * as Sequelize from 'sequelize';
 
 export interface RecruitAttributes extends Sequelize.Model {
+  crawlerName: string;
   company: string;
   url: string;
   title: string;
   startDate?: Date;
   endDate?: Date;
+  isOpen: number;
   updateDate: Date;
 }
 
@@ -17,6 +19,11 @@ export const recruitFactory = (sequelize: Sequelize.Sequelize) => {
   return <RecruitStatic>sequelize.define(
     'RecruitModel',
     {
+      crawlerName: {
+        type: new Sequelize.DataTypes.STRING(300),
+        field: 'crawler_name',
+        allowNull: false,
+      },
       company: {
         type: new Sequelize.DataTypes.STRING(100),
         allowNull: false,
@@ -36,6 +43,10 @@ export const recruitFactory = (sequelize: Sequelize.Sequelize) => {
       endDate: {
         type: Sequelize.DataTypes.DATE,
         field: 'end_date',
+      },
+      isOpen: {
+        type: Sequelize.DataTypes.TINYINT,
+        field: 'is_open',
       },
       updateDate: {
         type: Sequelize.DataTypes.DATE,

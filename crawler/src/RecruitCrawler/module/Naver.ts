@@ -17,6 +17,7 @@ interface ParmType {
 
 export default class Naver implements CrawlingModule {
   private logoToCompanyTitle: CompanyHash = {};
+  private moduleName = '네이버';
   private baseURL: string = 'https://recruit.navercorp.com/';
 
   constructor() {
@@ -100,4 +101,6 @@ export default class Naver implements CrawlingModule {
       contents,
     };
   };
+
+  public getModuleName = () => this.moduleName;
 }

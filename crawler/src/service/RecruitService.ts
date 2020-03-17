@@ -6,6 +6,14 @@ import RecruitData from 'DataType/RecruitData';
 export default class RecruitService {
   private static _instance: RecruitService;
 
+  /*--------------------------------
+      Private Method
+  --------------------------------*/
+  private static init = async (): Promise<void> => {};
+
+  /*--------------------------------
+      Public Method
+  --------------------------------*/
   public static getInstance = (): RecruitService => {
     if (!RecruitService._instance) {
       RecruitService._instance = new RecruitService();
@@ -14,19 +22,33 @@ export default class RecruitService {
     return RecruitService._instance;
   };
 
-  private static init = async (): Promise<void> => {};
-  public insertRecruit = (datas: RecruitData[]) => {
+  public updateRecruit = async (datas: RecruitData[], moduleName: string) => {
+    // 기존 Recruit Close
+    const recruitModel = db.Recruit;
+    await recruitModel.update({ isOpen: 0 }, { where: { crawlerName: moduleName } });
+
+    // 크롤링 데이터 Merge
     const rows = datas.map(data => ({
+      crawlerName: moduleName,
       company: data.company,
       url: data.url,
       title: data.title,
       startDate: data.startDate,
       endDate: data.endDate,
+      isOpen: data.endDate && data.endDate < moment() ? 0 : 1,
       updateDate: moment(),
     }));
 
-    db.Recruit.bulkCreate(rows, {
-      updateOnDuplicate: ['company', 'title', 'startDate', 'endDate'],
+    await recruitModel.bulkCreate(rows, {
+      updateOnDuplicate: [
+        'crawlerName',
+        'company',
+        'title',
+        'startDate',
+        'endDate',
+        'isOpen',
+        'updateDate',
+      ],
     });
   };
 }
