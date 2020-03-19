@@ -3,4 +3,4 @@ node_modules
 package-lock.json
 yarn-error.log
 yarn.lock
-src/db/dbConfig.json
+src/models/dbConfig.json

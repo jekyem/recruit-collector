@@ -7,7 +7,7 @@ export interface RecruitAttributes extends Sequelize.Model {
   title: string;
   startDate?: Date;
   endDate?: Date;
-  isOpen: number;
+  pageIsOpen: number;
   updateDate: Date;
 }
 
@@ -44,9 +44,9 @@ export const recruitFactory = (sequelize: Sequelize.Sequelize) => {
         type: Sequelize.DataTypes.DATE,
         field: 'end_date',
       },
-      isOpen: {
+      pageIsOpen: {
         type: Sequelize.DataTypes.TINYINT,
-        field: 'is_open',
+        field: 'page_is_open',
       },
       updateDate: {
         type: Sequelize.DataTypes.DATE,

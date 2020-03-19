@@ -1,11 +1,12 @@
 import * as Sequelize from "sequelize";
 
-export interface RecruitAttributes extends Sequelize.Model {
+interface RecruitAttributes extends Sequelize.Model {
+  company: string;
   url: string;
   title: string;
   startDate?: Date;
   endDate?: Date;
-  createDate: Date;
+  pageIsOpen: number;
 }
 
 export type RecruitStatic = typeof Sequelize.Model & {
@@ -35,6 +36,10 @@ export const recruitFactory = (sequelize: Sequelize.Sequelize) => {
       endDate: {
         type: Sequelize.DataTypes.DATE,
         field: "end_date"
+      },
+      pageIsOpen: {
+        type: Sequelize.DataTypes.TINYINT,
+        field: "page_is_open"
       }
     },
     {

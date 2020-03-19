@@ -35,7 +35,7 @@ export default class RecruitService {
       title: data.title,
       startDate: data.startDate,
       endDate: data.endDate,
-      isOpen: data.endDate && data.endDate < moment() ? 0 : 1,
+      pageIsOpen: 1,
       updateDate: moment(),
     }));
 
@@ -46,7 +46,7 @@ export default class RecruitService {
         'title',
         'startDate',
         'endDate',
-        'isOpen',
+        'pageIsOpen',
         'updateDate',
       ],
     });

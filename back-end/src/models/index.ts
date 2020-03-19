@@ -1,5 +1,5 @@
 import * as Sequelize from "sequelize";
-import { recruitFactory } from "./model/Recruit";
+import { recruitFactory } from "./Recruit";
 
 const dbConfig = require("./dbConfig.json");
 
