@@ -8,7 +8,6 @@ export interface RecruitAttributes extends Sequelize.Model {
   startDate?: Date;
   endDate?: Date;
   pageIsOpen: number;
-  updateDate: Date;
 }
 
 export type RecruitStatic = typeof Sequelize.Model & {
@@ -20,7 +19,7 @@ export const recruitFactory = (sequelize: Sequelize.Sequelize) => {
     'RecruitModel',
     {
       crawlerName: {
-        type: new Sequelize.DataTypes.STRING(300),
+        type: new Sequelize.DataTypes.STRING(100),
         field: 'crawler_name',
         allowNull: false,
       },
@@ -48,13 +47,9 @@ export const recruitFactory = (sequelize: Sequelize.Sequelize) => {
         type: Sequelize.DataTypes.TINYINT,
         field: 'page_is_open',
       },
-      updateDate: {
-        type: Sequelize.DataTypes.DATE,
-        field: 'update_date',
-      },
     },
     {
-      tableName: 'recruits',
+      tableName: 'recruit_page',
       timestamps: false,
     },
   );

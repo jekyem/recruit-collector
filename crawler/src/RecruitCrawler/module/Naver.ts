@@ -31,6 +31,7 @@ export default class Naver implements CrawlingModule {
     titleHash['/img/common/sml_NL_ci.png'] = '네이버 랩스';
     titleHash['/img/common/sml_WM_ci.png'] = '네이버 웍스 모바일';
     titleHash['/img/common/sml_NB_ci.png'] = '네이버 비지니스 플랫폼';
+    titleHash['/img/common/sml_NW_ci.png'] = '네이버 웹툰';
 
     return titleHash;
   }

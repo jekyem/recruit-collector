@@ -43,7 +43,7 @@ export const recruitFactory = (sequelize: Sequelize.Sequelize) => {
       }
     },
     {
-      tableName: "recruits",
+      tableName: "recruit_page",
       timestamps: false
     }
   );
