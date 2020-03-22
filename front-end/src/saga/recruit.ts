@@ -4,17 +4,20 @@ import axios from "axios";
 
 function* getRecruits(action: any) {
   try {
-    const request = yield axios.get("http://52.231.91.8:4000/api/recruits", {
-      params: {
-        searchTerm: action.payload.searchTerm,
-        offset: action.payload.offset,
-        limit: action.payload.limit
+    const request = yield axios.get(
+      "http://recruit-collector.southeastasia.cloudapp.azure.com/api/recruits",
+      {
+        params: {
+          searchTerm: action.payload.searchTerm,
+          offset: action.payload.offset,
+          limit: action.payload.limit
+        }
       }
-    });
+    );
     yield put({
       type: RecruitAction.GET_RECRUITS_SUCCESS,
       payload: {
-        pageList: request.data.pageList,
+        pageList: request.data.recruits,
         total: request.data.total
       }
     });
