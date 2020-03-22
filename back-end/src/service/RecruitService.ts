@@ -1,7 +1,7 @@
 import { Sequelize, Op } from "sequelize";
 import moment from "moment";
-import db from "models";
-import { RecruitStatic } from "models/Recruit";
+import db from "@src/models";
+import { RecruitStatic } from "@src/models/Recruit";
 
 interface RecruitInfo {
   company: string;

@@ -12,15 +12,13 @@
     "strict": true,
     "target": "es6",
     "moduleResolution": "node",
+    "resolveJsonModule": true,
     "paths": {
-      "@daos": ["src/daos"],
-      "@entities": ["src/entities"],
-      "@shared": ["src/shared"],
-      "@server": ["src/Server"]
+      "@src/*": ["*"]
     },
     "types": ["node"],
     "typeRoots": ["node_modules/@types"]
   },
-  "include": ["src/**/*.ts", "spec/**/*.ts"],
+  "include": ["src/**/*.ts", "src/**/*.json", "spec/**/*.ts"],
   "exclude": ["src/public/"]
 }

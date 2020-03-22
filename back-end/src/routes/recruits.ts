@@ -1,6 +1,6 @@
 import { Router, Request, Response } from "express";
 import { OK } from "http-status-codes";
-import RecruitService from "service/RecruitService";
+import RecruitService from "@src/service/RecruitService";
 
 const router = Router();
 const DEFAULT_OFFSET = 0;
