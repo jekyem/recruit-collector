@@ -12,8 +12,8 @@ export default class KakaoEnterprise implements CrawlingModule {
 
   public getRecruitLists = async (page: Page): Promise<{ url: string; parm?: any }[]> => {
     await page.goto(RECRUIT_LIST_PAGE_URL);
-    await page.waitFor(200);
-    await page.waitForSelector('span#breakcrumb');
+    await page.waitFor(500);
+    await page.waitForSelector('div#divTabList');
 
     //Click Tech Menu
     const techMenu = (await page.$x('//*[@id="divTabList"]/ul/li[2]/a'))[0];

@@ -2,9 +2,10 @@ import fs from 'fs';
 import path from 'path';
 import CrawlingModule from '../CrawlingModule';
 import Naver from './Naver';
+import KakaoEnterprise from './KakaoEnterprise';
 
 export const getModules = (): CrawlingModule[] => {
-  const modules: CrawlingModule[] = [new Naver()];
+  const modules: CrawlingModule[] = [new KakaoEnterprise(), new Naver()];
 
   return modules;
 };
