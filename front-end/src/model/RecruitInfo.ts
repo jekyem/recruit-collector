@@ -3,6 +3,7 @@ export default interface RecruitInfo {
   title: string;
   url: string;
   startDate: string;
-  endDate: string;
-  job_type: string;
+  endDate?: string;
+  pageIsOpen: number;
+  // job_type: string;
 }

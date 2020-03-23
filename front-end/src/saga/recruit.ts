@@ -4,15 +4,11 @@ import axios from "axios";
 
 function* getRecruits(action: any) {
   try {
+    const { searchTerm, offset, limit } = action.payload;
+
     const request = yield axios.get(
-      "http://recruit-collector.southeastasia.cloudapp.azure.com/api/recruits",
-      {
-        params: {
-          searchTerm: action.payload.searchTerm,
-          offset: action.payload.offset,
-          limit: action.payload.limit
-        }
-      }
+      `${process.env.REACT_APP_BACK_END_URL}/api/recruits`,
+      { params: { searchTerm, offset, limit } }
     );
     yield put({
       type: RecruitAction.GET_RECRUITS_SUCCESS,
