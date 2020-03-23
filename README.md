@@ -9,3 +9,5 @@
   로그인 / 관심설정
   
   프론트 페이징 사이즈 변경시 
+
+페이지 주소 : http://recruit-collector.southeastasia.cloudapp.azure.com/
