@@ -14,7 +14,7 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "paths": {
-      "@src/*": ["*"]
+      "@src/*": ["./*"]
     },
     "types": ["node"],
     "typeRoots": ["node_modules/@types"]

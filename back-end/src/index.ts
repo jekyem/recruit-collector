@@ -1,5 +1,4 @@
-import "module-alias/register";
-import "@src/LoadEnv"; // Must be the first import
+import "./LoadEnv"; // Must be the first import
 import app from "@src/Server";
 import { logger } from "@src/shared";
 
