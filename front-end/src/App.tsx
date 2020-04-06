@@ -8,6 +8,8 @@ import createSagaMiddleware from "redux-saga";
 import MainPage from "pages/MainPage";
 import reducers from "reducers";
 import rootSaga from "saga";
+import LoginModule from "login-module/LoginModule";
+import LoginPopup from "containers/popup/LoginPopupContainer";
 
 const GolbalStyle = createGlobalStyle`
   html, body, #root {
@@ -22,6 +24,8 @@ const App = () => (
   <>
     <GolbalStyle />
     <Provider store={configStore()}>
+      <LoginModule />
+      <LoginPopup />
       <Layout>
         <MainPage />
       </Layout>

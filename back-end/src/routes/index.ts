@@ -7,7 +7,7 @@ const router = Router();
 
 // Add sub-routes
 router.use("/oauth", Oauth);
-// router.use("/recruits", Recruits);
+router.use("/recruits", Recruits);
 
 // Export the base-router
 export default router;

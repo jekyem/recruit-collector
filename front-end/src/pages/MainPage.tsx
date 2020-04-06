@@ -1,6 +1,6 @@
 import React from "react";
-
 import styled from "styled-components";
+
 import SearchContainer from "containers/main/SearchContainer";
 import RecruitListContainer from "containers/main/RecruitListContainer";
 

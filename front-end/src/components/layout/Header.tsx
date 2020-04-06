@@ -33,24 +33,21 @@ const Menu = styled.ul`
   list-style: none;
 `;
 
-const MenuItem = styled.li`
-  margin-left: 12px;
-  padding: 0px 8px;
-  cursor: pointer;
-  :hover {
-    border-bottom: 2px solid #1f4e5f;
-  }
-`;
+interface PropsType {
+  MenuItems: React.ReactNode[];
+}
 
-const Header = () => (
-  <Wapper>
-    <Inner>
-      <Logo>LOGO</Logo>
-      <Menu>
-        <MenuItem>로그인</MenuItem>
-      </Menu>
-    </Inner>
-  </Wapper>
-);
+const Header = (props: PropsType) => {
+  const { MenuItems } = props;
+
+  return (
+    <Wapper>
+      <Inner>
+        <Logo>LOGO</Logo>
+        <Menu>{MenuItems}</Menu>
+      </Inner>
+    </Wapper>
+  );
+};
 
 export default Header;
