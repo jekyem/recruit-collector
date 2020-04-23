@@ -1,19 +1,28 @@
 import React from "react";
 import NaverLogin from "./naver-login/NaverLogin";
 import { useDispatch } from "react-redux";
-import { setPageToken } from "reducers/oauth/action";
+import NaverToken from "./naver-login/NaverToken";
+import {
+  getLoginToken,
+  GetAccessTokenAtSessionStorage,
+} from "action/PageAction";
+
 const LoginModule = () => {
-  const pageToken = sessionStorage.getItem("pageToken");
+  const pageToken = sessionStorage.getItem("access-token");
   const dispatch = useDispatch();
 
   if (pageToken) {
-    dispatch(setPageToken(pageToken));
+    dispatch(GetAccessTokenAtSessionStorage(pageToken));
     return null;
   }
 
   return (
     <>
-      <NaverLogin />
+      <NaverLogin
+        onTokenExist={(naverToken: NaverToken) => {
+          dispatch(getLoginToken("naver", naverToken));
+        }}
+      />
     </>
   );
 };

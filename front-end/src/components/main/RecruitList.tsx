@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import styled from "styled-components";
-import { Pagination } from "antd";
+import { Pagination, Skeleton } from "antd";
 
 import RecruitItem from "./RecruitItem";
 import RecruitInfo from "model/RecruitInfo";
@@ -45,19 +45,45 @@ const MyPagination = styled(Pagination)`
 `;
 
 interface PropsType {
+  isLoding: boolean;
   recruits: RecruitInfo[];
   total: number;
-  movePage: (page: number, size: number) => void;
+  page: number;
+  pageSize: number;
+  onChangePage: (page: number) => void;
+  onChangePageSize: (pageSize: number) => void;
 }
 
 const RecruitList = (props: PropsType) => {
-  const [page, setPage] = useState<number>(1);
-
   const items = useCallback(() => {
     return props.recruits.map((data, index: number) => (
       <RecruitItem key={index} recruitInfo={data} />
     ));
   }, [props.recruits])();
+
+  if (props.isLoding) {
+    return (
+      <Wapper>
+        <List>
+          <li>
+            <Skeleton active />
+          </li>
+          <li>
+            <Skeleton active />
+          </li>
+          <li>
+            <Skeleton active />
+          </li>
+        </List>
+      </Wapper>
+    );
+  }
+
+  const onChange = (page: number, pageSize?: number) => {
+    if (props.page !== page) props.onChangePage(page);
+    else if (pageSize && props.pageSize !== pageSize)
+      props.onChangePageSize(page);
+  };
 
   return (
     <Wapper>
@@ -65,12 +91,10 @@ const RecruitList = (props: PropsType) => {
       <PagingWapper>
         <MyPagination
           total={props.total}
-          current={page}
+          current={props.page}
+          pageSize={props.pageSize}
           size="small"
-          onChange={(page: number, pageSize?: number) => {
-            if (pageSize) props.movePage(page, pageSize);
-            setPage(page);
-          }}
+          onChange={onChange}
         />
       </PagingWapper>
     </Wapper>

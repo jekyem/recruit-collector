@@ -1,6 +1,4 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { loginRequest } from "reducers/oauth/action";
 import NaverToken from "./NaverToken";
 
 interface Hash {
@@ -25,15 +23,17 @@ const getNaverToken = (href: string): NaverToken | undefined => {
     };
 };
 
-const NaverLogin = () => {
-  const dispatch = useDispatch();
+interface PropsType {
+  onTokenExist: (token: NaverToken) => void;
+}
 
+const NaverLogin = (props: PropsType) => {
   useEffect(() => {
     const url = window.location.href;
     const naverToken = getNaverToken(url);
 
     if (naverToken) {
-      dispatch(loginRequest("naver", naverToken));
+      props.onTokenExist(naverToken);
       window.history.pushState(null, document.title, url.split("#")[0]);
     } else {
       const loginModule = new (window as any).naver.LoginWithNaverId({
@@ -52,7 +52,6 @@ const NaverLogin = () => {
 };
 
 export const naverLogin = () => {
-  console.log(document.getElementById("naverIdLogin"));
   document.getElementById("naverIdLogin_loginButton")?.click();
 };
 

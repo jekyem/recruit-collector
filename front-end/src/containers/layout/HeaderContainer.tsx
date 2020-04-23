@@ -1,10 +1,10 @@
 import React from "react";
 import Header from "components/layout/Header";
 import MenuItem from "components/layout/MenuItem";
-import { useSelector, useDispatch, createDispatchHook } from "react-redux";
-import { ReducerType } from "reducers";
+import { useSelector, useDispatch } from "react-redux";
+import { RootReducer } from "reducers";
 import { Dispatch } from "redux";
-import { showLoginPopup, logout } from "reducers/oauth/action";
+import { clickLoginButton, clickLogoutButton } from "action/UserAction";
 
 const makeLoginItem = (token: string | null, dispatch: Dispatch<any>) => {
   return token ? (
@@ -13,7 +13,7 @@ const makeLoginItem = (token: string | null, dispatch: Dispatch<any>) => {
       label="로그아웃"
       onClick={() => {
         sessionStorage.removeItem("pageToken");
-        dispatch(logout());
+        dispatch(clickLogoutButton());
       }}
     />
   ) : (
@@ -21,7 +21,7 @@ const makeLoginItem = (token: string | null, dispatch: Dispatch<any>) => {
       key="LoginMenu"
       label="로그인"
       onClick={() => {
-        dispatch(showLoginPopup());
+        dispatch(clickLoginButton());
       }}
     />
   );
@@ -29,7 +29,7 @@ const makeLoginItem = (token: string | null, dispatch: Dispatch<any>) => {
 
 const HeaderContainer = () => {
   const dispatch = useDispatch();
-  const { token } = useSelector(({ oauth }: ReducerType) => oauth);
+  const { token } = useSelector(({ pageReducer }: RootReducer) => pageReducer);
   const MenuItmes: React.ReactNode[] = [];
 
   MenuItmes.push(makeLoginItem(token, dispatch));

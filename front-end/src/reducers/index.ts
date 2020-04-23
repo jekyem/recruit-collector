@@ -1,12 +1,16 @@
 import { combineReducers } from "redux";
-import recruit, { RecruitStateType } from "./recruit";
-import search, { SearchStateType } from "./search";
-import oauth, { OAuthStateType } from "./oauth";
+import recruitListReducer, { RecruitListReducer } from "./recruitListReducer";
+import searchBoxReducer, { SearchBoxReducer } from "./searchBoxReducer";
+import pageReducer, { PageReducer } from "./pageReducer";
 
-export interface ReducerType {
-  recruit: RecruitStateType;
-  search: SearchStateType;
-  oauth: OAuthStateType;
+export interface RootReducer {
+  recruitListReducer: RecruitListReducer;
+  searchBoxReducer: SearchBoxReducer;
+  pageReducer: PageReducer;
 }
 
-export default combineReducers({ recruit, search, oauth });
+export default combineReducers<RootReducer>({
+  recruitListReducer,
+  searchBoxReducer,
+  pageReducer,
+});

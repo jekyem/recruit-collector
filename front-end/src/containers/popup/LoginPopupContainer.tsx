@@ -2,20 +2,20 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import LoginPopup from "components/popup/LoginPopup";
-import { hideLoginPopup } from "reducers/oauth/action";
-import { ReducerType } from "reducers";
+import { RootReducer } from "reducers";
+import { clickOutsideOfLoginPopup } from "action/UserAction";
 
 const LoginPopupContainer = () => {
   const dispatch = useDispatch();
-  const { token, openLoginPopup } = useSelector(
-    ({ oauth }: ReducerType) => oauth
+  const { visiableLoginPopup, token } = useSelector(
+    ({ pageReducer }: RootReducer) => pageReducer
   );
 
   const onClickOutside = () => {
-    dispatch(hideLoginPopup());
+    dispatch(clickOutsideOfLoginPopup());
   };
 
-  if (token !== null || openLoginPopup === false) return null;
+  if (token !== null || visiableLoginPopup === false) return null;
   return <LoginPopup onClickOutside={onClickOutside} />;
 };
 

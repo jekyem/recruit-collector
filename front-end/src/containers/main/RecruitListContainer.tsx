@@ -1,28 +1,34 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import RecruitList from "components/main/RecruitList";
-import { ReducerType } from "reducers";
-import { requestRecruit } from "reducers/recruit/action";
+import { RootReducer } from "reducers";
+import { initializeRecruitList } from "action/PageAction";
+import { changePage, changePageSize } from "action/UserAction";
 
 const RecruitListContainer = () => {
-  const recruit = useSelector(({ recruit }: ReducerType) => recruit);
-  const searchParm = useSelector(({ search }: ReducerType) => search);
+  const { recruits, total, isLoding, page, pageSize } = useSelector(
+    ({ recruitListReducer }: RootReducer) => recruitListReducer
+  );
   const dispatch = useDispatch();
 
-  const movePage = useCallback(
-    (page: number, size: number) => {
-      const offset = (page - 1) * size;
-      dispatch(requestRecruit(searchParm.term, offset, size));
-    },
-    [dispatch, searchParm.term]
-  );
+  useEffect(() => {
+    dispatch(initializeRecruitList());
+  }, [dispatch]);
 
   return (
     <RecruitList
-      recruits={recruit.pageList}
-      total={recruit.total}
-      movePage={movePage}
+      isLoding={isLoding}
+      recruits={recruits}
+      total={total}
+      page={page}
+      pageSize={pageSize}
+      onChangePage={(page: number) => {
+        dispatch(changePage(page));
+      }}
+      onChangePageSize={(pageSize: number) => {
+        dispatch(changePageSize(pageSize));
+      }}
     />
   );
 };
